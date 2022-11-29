@@ -21,13 +21,15 @@ if __name__ == '__main__':
     dic_planilha_certificado = ler_planilha_certificados()
     dic_certificados = ler_diretorio_certificados()
 
-    
+    dic_certificados_filtrado = {}
     for CNPJ in lista_CNPJ_8_digitos_iniciais:
         if dic_certificados.get(CNPJ):
             if dic_planilha_certificado.get(CNPJ):
                 arquivo_certificado = dic_certificados.get(CNPJ)
                 senha_certificado = dic_planilha_certificado.get(CNPJ)
-                salvar_logs(f'{arquivo_certificado} | {senha_certificado}')
+                dic_certificados_filtrado[CNPJ] = {'CERTIFICADO': arquivo_certificado}
+                dic_certificados_filtrado[CNPJ].update({'SENHA_CERTIFICADO': senha_certificado})
+                # salvar_logs(f'{arquivo_certificado} | {senha_certificado}')
             else:
                 salvar_logs(f'certificado nao encontrado na planilha de certificados => {CNPJ}')
         else:
@@ -35,6 +37,22 @@ if __name__ == '__main__':
 
 
     plan_empresas = ler_planilha_empresas(apenas_CNPJ=False)
+    dicionario_empresa = {}
     for plan in plan_empresas.values:
-        print(plan)
-        # pass
+        cnpj = plan[1].replace('.', '').replace('/', '').replace('-', '')
+        cnpj_8_digitos = cnpj[0:8]
+        if dic_certificados_filtrado.get(cnpj_8_digitos): 
+            dicionario_empresa[cnpj] = {'COD_UNICO': plan[0]}
+            dicionario_empresa[cnpj].update({'CNPJ': cnpj})
+            try:
+                dicionario_empresa[cnpj].update({'NOME_PASTA': plan[2] + ' ' + plan[3]})
+            except:
+                dicionario_empresa[cnpj].update({'NOME_PASTA': plan[2]})
+
+            dicionario_empresa[cnpj].update({'CERTIFICADO': dic_certificados_filtrado.get(cnpj_8_digitos)['CERTIFICADO']})
+            dicionario_empresa[cnpj].update({'SENHA_CERTIFICADO': dic_certificados_filtrado.get(cnpj_8_digitos)['SENHA_CERTIFICADO']})
+        
+        # print(plan)
+
+    # print(dic_certificados_filtrado)
+    print(dicionario_empresa)
