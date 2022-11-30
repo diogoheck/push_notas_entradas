@@ -9,10 +9,8 @@ from salvar_logs_sistema import salvar_logs
 
 if __name__ == '__main__':
     dic_credencais_clientes = ler_credenciais_clientes()
-
-    # for k, v in dic_credencais_clientes.items():
-    #     print(k, v)
-
+    if os.path.exists(LOCAL_GRAVAR):
+        os.remove(LOCAL_GRAVAR)
 
     # Criar as pastas dos clientes para armazenar os xmls
     while 1:
@@ -34,18 +32,18 @@ if __name__ == '__main__':
                 os.mkdir(caminho_pasta)
 
             # se nao ha nenhum xml na pasta, faça a requisicao
-            if not os.listdir(caminho_pasta):
-                salvar_logs('*' * 50, LOCAL_GRAVAR)
-                salvar_logs(credencias.get('NOME_PASTA'), LOCAL_GRAVAR)
-                salvar_logs('*' * 50, LOCAL_GRAVAR)
-                
-                print('*' * 50)
-                print(credencias.get('NOME_PASTA'))
-                print('*' * 50)
-                
-                # fazer as requisições / downloads
-                requisicao_web(credencias)
-                renomear_xml(credencias.get('NOME_PASTA'))
+            # if not os.listdir(caminho_pasta):
+            salvar_logs('*' * 50, LOCAL_GRAVAR)
+            salvar_logs(credencias.get('NOME_PASTA'), LOCAL_GRAVAR)
+            salvar_logs('*' * 50, LOCAL_GRAVAR)
+
+            print('*' * 50)
+            print(credencias.get('NOME_PASTA'))
+            print('*' * 50)
+            
+            # fazer as requisições / downloads
+            requisicao_web(credencias)
+            renomear_xml(credencias.get('NOME_PASTA'))
 
             
         print('*' * 50)

@@ -2,7 +2,8 @@ import os
 import xml.etree.ElementTree as Et
 from datetime import date
 import time
-
+from salvar_logs_sistema import salvar_logs
+LOCAL_GRAVAR = 'R:\Compartilhado\Ti\Push_XML_log\log_duplicidade_notas.txt'
 
 class Read_xml():
     def __init__(self, directory) -> None:
@@ -120,6 +121,6 @@ def renome_arquivo(nome_pasta):
             print(f'Operação não permitida. {result[0][0]}')
         except FileExistsError:
             os.remove(i)
-            print(f'############## DELETADO POR DUPLICIDADE ##############')
+            salvar_logs(f'############## DELETADO POR DUPLICIDADE ############## {nome_aqr}', LOCAL_GRAVAR)
         except OSError as error:
             print(error)
