@@ -5,12 +5,16 @@ from openpyxl import load_workbook
 import os
 from time import sleep
 LOCAL_GRAVAR = 'R:\Compartilhado\Ti\Push_XML_log\log_PUSH.txt'
+LOCAL_GRAVAR_DUPL = 'R:\Compartilhado\Ti\Push_XML_log\log_duplicidade_notas.txt'
 from salvar_logs_sistema import salvar_logs
 
 if __name__ == '__main__':
     dic_credencais_clientes = ler_credenciais_clientes()
     if os.path.exists(LOCAL_GRAVAR):
         os.remove(LOCAL_GRAVAR)
+    # if os.path.exists(LOCAL_GRAVAR_DUPL):
+    #     os.remove(LOCAL_GRAVAR_DUPL)
+    
 
     # Criar as pastas dos clientes para armazenar os xmls
     while 1:

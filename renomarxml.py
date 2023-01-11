@@ -88,7 +88,7 @@ class Read_xml():
 
 
 def renome_arquivo(nome_pasta):
-    xml = Read_xml(r'r:\\Compartilhado\\Push\\xmls_temp')
+    xml = Read_xml(rf'r:\Compartilhado\Push\xmls_temp')
     all = xml.all_files()
     # print(all)
     w = 1
@@ -100,9 +100,9 @@ def renome_arquivo(nome_pasta):
 
         if comb == "":
             # destino de notas que não são combustivel com base na tag "descANP"
-            nome_aqr = rf'r:\\Compartilhado\\Push\\{nome_pasta}\\{result[0][3]}.xml'
+            nome_aqr = rf'r:\Compartilhado\Push\{nome_pasta}\{result[0][3]}.xml'
         else:
-            nome_aqr = rf'r:\\Compartilhado\\Push\\{nome_pasta}\\{result[0][3]}.xml'
+            nome_aqr = rf'r:\Compartilhado\Push\{nome_pasta}\{result[0][3]}.xml'
             # destino das notas que são combustivel com base na tag "descANP"
             # print("SEPARANDO XML DE COMBUSTIVEL")
             # nome_aqr = rf'U:\\TOTVS\\Protheus12\\Protheus_data\\xmlnfe\\nfe_in\\{result[0][3]}.xml'
