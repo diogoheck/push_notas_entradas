@@ -44,7 +44,7 @@ if __name__ == '__main__':
             print('*' * 50)
             print(credencias.get('NOME_PASTA'))
             print('*' * 50)
-            
+            print(credencias)
             # fazer as requisições / downloads
             requisicao_web(credencias)
             renomear_xml(credencias.get('NOME_PASTA'))

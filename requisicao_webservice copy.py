@@ -16,14 +16,14 @@ from salvar_logs_sistema import salvar_logs
 LOCAL_GRAVAR = 'R:\Compartilhado\Ti\Push_XML_log\log_PUSH.txt'
 
 
-def df_manifesto(dic):
+def df_manifesto():
 
     uf = 'rs'
     homologacao = False
     NSU = 0
     CHAVE = ''
 
-    con = ComunicacaoSefaz(uf, dic['CERTIFICADO'], dic['SENHA_CERTIFICADO'], homologacao)
+    con = ComunicacaoSefaz(uf, 'SAMITEC  SOLUCOES ANALITICAS MICROBIOLOGICAS E T.pfx', '014729', homologacao)
     ultNSU = 0
     maxNSU = 0
     cStat = 0
@@ -31,10 +31,10 @@ def df_manifesto(dic):
     while True:
         
         xml = con.consulta_distribuicao(
-            cnpj=dic['CNPJ'], chave=CHAVE, nsu=NSU)
+            cnpj='09014729000191', chave=CHAVE, nsu=NSU)
         NSU = str(NSU).zfill(15)
         print(f'Nova consulta a partir do NSU: {NSU}')
-        # salvar_logs(f'Nova consulta a partir do NSU: {NSU}', LOCAL_GRAVAR)
+        salvar_logs(f'Nova consulta a partir do NSU: {NSU}', LOCAL_GRAVAR)
 
         with open(rf'r:\\Compartilhado\\Push\\xmls_temp\\Resumo_xml\\consulta_distrib_gzip-{NSU}.xml', 'w+') as f:
             f.write(xml.text)
@@ -122,3 +122,5 @@ def df_manifesto(dic):
             print(f'Falha')
             salvar_logs(f'Falha', LOCAL_GRAVAR)
             break
+
+df_manifesto()
