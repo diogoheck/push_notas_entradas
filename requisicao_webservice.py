@@ -13,7 +13,7 @@ requests.packages.urllib3.disable_warnings(
     requests.packages.urllib3.exceptions.InsecureRequestWarning)
 from salvar_logs_sistema import salvar_logs
 
-LOCAL_GRAVAR = 'R:\Compartilhado\Ti\Push_XML_log\log_PUSH.txt'
+# LOCAL_GRAVAR = 'R:\Compartilhado\Ti\Push_XML_log\log_PUSH.txt'
 
 
 def df_manifesto(dic):
@@ -49,24 +49,24 @@ def df_manifesto(dic):
         contador_resposta = len(resposta.xpath(
             '//ns:retDistDFeInt/ns:loteDistDFeInt/ns:docZip', namespaces=ns))
         print(f'Quantidade de NSUs na consulta atual: {contador_resposta}')
-        salvar_logs(
-            f'Quantidade de NSUs na consulta atual: {contador_resposta}', LOCAL_GRAVAR)
+        # salvar_logs(
+            # f'Quantidade de NSUs na consulta atual: {contador_resposta}', LOCAL_GRAVAR)
 
         try:
             cStat = resposta.xpath(
                 '//ns:retDistDFeInt/ns:cStat', namespaces=ns)[0].text
             print(f'cStat: {cStat}')
-            salvar_logs(f'cStat: {cStat}', LOCAL_GRAVAR)
+            # salvar_logs(f'cStat: {cStat}', LOCAL_GRAVAR)
 
             xMotivo = resposta.xpath(
                 '//ns:retDistDFeInt/ns:xMotivo', namespaces=ns)[0].text
             print(f'xMotivo: {xMotivo}')
-            salvar_logs(f'xMotivo: {xMotivo}', LOCAL_GRAVAR)
+            # salvar_logs(f'xMotivo: {xMotivo}', LOCAL_GRAVAR)
 
             maxNSU = resposta.xpath(
                 '//ns:retDistDFeInt/ns:maxNSU', namespaces=ns)[0].text
             print(f'maxNSU: {maxNSU}')
-            salvar_logs(f'maxNSU: {maxNSU}', LOCAL_GRAVAR)
+            # salvar_logs(f'maxNSU: {maxNSU}', LOCAL_GRAVAR)
         except IndexError:
             pass
             # 137=nao tem mais arquivos e 138=existem mais arquivos para baixar
@@ -112,13 +112,13 @@ def df_manifesto(dic):
             NSU = resposta.xpath(
                 '//ns:retDistDFeInt/ns:ultNSU', namespaces=ns)[0].text
             print(f'NSU: {NSU}')
-            salvar_logs(f'NSU: {NSU}', LOCAL_GRAVAR)
+            # salvar_logs(f'NSU: {NSU}', LOCAL_GRAVAR)
 
         elif (cStat == '137'):
             print(f'Nao ha mais documentos a pesquisar')
-            salvar_logs(f'Nao ha mais documentos a pesquisar', LOCAL_GRAVAR)
+            # salvar_logs(f'Nao ha mais documentos a pesquisar', LOCAL_GRAVAR)
             break
         else:
             print(f'Falha')
-            salvar_logs(f'Falha', LOCAL_GRAVAR)
+            # salvar_logs(f'Falha', LOCAL_GRAVAR)
             break
